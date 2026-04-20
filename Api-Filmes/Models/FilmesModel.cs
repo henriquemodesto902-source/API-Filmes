@@ -8,7 +8,7 @@
         public string Genero { get; set; }
         public int Ano { get; set; }
         public string Sinopse { get; set; }
-        public int Duração { get; set; }
+        public string Duração { get; set; }
         public double Avaliação { get; set; }
 
         public DiretorModel Diretor { get; set; }
