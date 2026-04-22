@@ -1,4 +1,5 @@
 
+using Api_Filmes.Services.Diretor;
 using Microsoft.EntityFrameworkCore;
 
 namespace Api_Filmes
@@ -15,6 +16,8 @@ namespace Api_Filmes
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddScoped<DiretorInterface, DiretorService>();
 
             builder.Services.AddDbContext<Data.AppDBContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
