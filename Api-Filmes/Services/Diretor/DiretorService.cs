@@ -12,14 +12,60 @@ namespace Api_Filmes.Services.Diretor
             _context = context;
         }
 
-        public Task<ResponseModel<DiretorModel>> BuscarDiretorPorId(int idDiretor)
+        public async Task<ResponseModel<DiretorModel>> BuscarDiretorPorId(int idDiretor)
         {
-            throw new NotImplementedException();
+
+            ResponseModel<DiretorModel> response = new ResponseModel<DiretorModel>();
+            try
+            {
+
+                var diretor = await _context.Diretores.FirstOrDefaultAsync(diretorbanco => diretorbanco.Id == idDiretor );
+
+                if(diretor == null)
+                {
+                    response.Mensagem = "Diretor não encontrado.";
+                    return response;
+                }
+             
+                response.Dados = diretor;
+                response.Mensagem = "Diretor encontrado com sucesso.";
+                return response;
+
+
+
+            } catch (Exception ex)
+            {
+                response.Mensagem = ex.Message;
+                response.Status = false;
+                return response;
+            }
         }
 
-        public Task<ResponseModel<DiretorModel>> BuscarDiretorPorIdFilme(int idFilme)
+        public async Task<ResponseModel<DiretorModel>> BuscarDiretorPorIdFilme(int idFilme)
         {
-            throw new NotImplementedException();
+            ResponseModel<DiretorModel> response = new ResponseModel<DiretorModel>();
+            try
+            {
+               var filme = await _context.Filmes.Include(d => d.Diretor).FirstOrDefaultAsync(filmeBanco => filmeBanco.Id == idFilme);
+
+                if (filme == null)
+                {
+                    response.Mensagem = "Nenhum registro encontrado.";
+                    return response;
+                }
+                response.Dados = filme.Diretor;
+                response.Mensagem = "Diretor encontrado com sucesso.";
+                return response;
+
+
+            }
+            catch (Exception ex)
+            {
+                response.Mensagem = ex.Message;
+                response.Status = false;
+                return response;
+
+            }
         }
 
         public async Task<ResponseModel<List<DiretorModel>>> ListarDiretores()

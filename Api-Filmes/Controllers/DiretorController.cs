@@ -23,5 +23,18 @@ namespace Api_Filmes.Controllers
             return Ok(Diretores);
         }
 
+        [HttpGet("BuscarDiretorPorId/{idDiretor}")]
+        public async Task<ActionResult<ResponseModel<DiretorModel>>> BuscarDiretorPorId(int idDiretor)
+        {
+            var Diretor = await _diretorinterface.BuscarDiretorPorId(idDiretor);
+            return Ok(Diretor);
+        }
+
+        [HttpGet("BuscarDiretorPorIdFilme/{idFilme}")]
+        public async Task<ActionResult<ResponseModel<DiretorModel>>> BuscarDireBuscarDiretorPorIdFilmed(int idFilme)
+        {
+            var Diretor = await _diretorinterface.BuscarDiretorPorIdFilme(idFilme);
+            return Ok(Diretor);
+        }
     }
 }

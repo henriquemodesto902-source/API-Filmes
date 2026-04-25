@@ -8,7 +8,7 @@ namespace Api_Filmes.Models
 
         public string Nome { get; set; }
         public string Sobrenome { get; set; }
-        public int Idade { get; set; }
+        public string Nascimento { get; set; }
         public string Nacionalidade { get; set; }
         [JsonIgnore]
         public ICollection<FilmesModel> Filmes { get; set; }
