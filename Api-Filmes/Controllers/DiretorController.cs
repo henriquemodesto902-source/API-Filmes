@@ -1,4 +1,5 @@
-﻿using Api_Filmes.Models;
+﻿using Api_Filmes.DTO.DiretorDTO;
+using Api_Filmes.Models;
 using Api_Filmes.Services.Diretor;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,27 @@ namespace Api_Filmes.Controllers
         public async Task<ActionResult<ResponseModel<DiretorModel>>> BuscarDireBuscarDiretorPorIdFilmed(int idFilme)
         {
             var Diretor = await _diretorinterface.BuscarDiretorPorIdFilme(idFilme);
+            return Ok(Diretor);
+        }
+
+        [HttpPost("CadastrarDiretor")]
+        public async Task<ActionResult<ResponseModel<List<DiretorModel>>>> CadastrarDiretor(DiretorCriaçãoDTO diretorCriaçãoDTO)
+        {
+            var Diretor = await _diretorinterface.CadastrarDiretor(diretorCriaçãoDTO);
+            return Ok(Diretor);
+        }
+
+        [HttpPut("EditarDiretor")]
+        public async Task<ActionResult<ResponseModel<List<DiretorModel>>>> EditarDiretor(DiretorEdiçãoDTO diretorEdiçãoDTO)
+        {
+            var Diretor = await _diretorinterface.EditarDiretor(diretorEdiçãoDTO);
+            return Ok(Diretor);
+        }
+
+        [HttpDelete("RemoverDiretor")]
+        public async Task<ActionResult<ResponseModel<List<DiretorModel>>>> RemoverDiretor(int idDiretor)
+        {
+            var Diretor = await _diretorinterface.RemoverDiretor(idDiretor);
             return Ok(Diretor);
         }
     }
